@@ -51,10 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run {input, parameters}
-    set p to POSIX path of (path to me)
-	return {p}
-end run</string>
+					<string>on run {input, parameters}    set p to POSIX path of (path to me)            set configFile to (POSIX file (p &amp; "Contents/Resources/Config/config.csv"))    open for access configFile    set configFileContents to (read configFile)    close access configFile        display dialog "Please enter your Patreon Creator's Access Token,your MailChimp API Key, and your MailChimp List ID into the following field,separating them with commas:" default answer configFileContents    set answer to text returned of result	        return {p, answer, (POSIX path of configFile)}end run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -78,8 +75,6 @@ end run</string>
 				</array>
 				<key>OutputUUID</key>
 				<string>A80EBF02-9C58-470B-8782-95DB89C4F3A3</string>
-				<key>StartAction</key>
-				<false/>
 				<key>UUID</key>
 				<string>15E0CC32-1309-4DED-9501-9D8DC46A29A9</string>
 				<key>UnlocalizedApplications</key>
@@ -107,12 +102,10 @@ end run</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>769.000000:316.000000</string>
+				<string>529.000000:316.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -168,8 +161,8 @@ end run</string>
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>PYTHON_SCRIPT="mailchimp.py"
-python "${1}../${PYTHON_SCRIPT}"</string>
+					<string>echo -n "${2}" &gt; "${3}"
+python "${1}Contents/mailchimp.py"</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -279,27 +272,162 @@ python "${1}../${PYTHON_SCRIPT}"</string>
 						<string>4</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>769.000000:499.000000</string>
+				<string>529.000000:499.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
 			<true/>
 		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>message</key>
+					<dict/>
+					<key>subtitle</key>
+					<dict/>
+					<key>title</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>MailChimp Update Complete!</string>
+						</array>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Display Notification.action</string>
+				<key>ActionName</key>
+				<string>Display Notification</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>message</key>
+					<string></string>
+					<key>subtitle</key>
+					<string></string>
+					<key>title</key>
+					<string>MailChimp Update Complete!</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Display-Notification</string>
+				<key>CFBundleVersion</key>
+				<string>1.0</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<false/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMDisplayNotificationAction</string>
+				<key>InputUUID</key>
+				<string>7B995605-C9BB-411D-9B53-CD3BC421A7F1</string>
+				<key>Keywords</key>
+				<array/>
+				<key>OutputUUID</key>
+				<string>55EACC4F-4DCD-4F40-AD7A-6BB451F44A10</string>
+				<key>UUID</key>
+				<string>3A9DC48D-891C-46D0-A3AB-5781296E7F0E</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>subtitle</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>title</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>message</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<false/>
+				<key>location</key>
+				<string>529.000000:541.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Display Notification.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<false/>
+		</dict>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>14135AB5-9B96-46BE-A28B-792B9A26DBFA</key>
+		<key>5B654387-804A-447D-9155-A8622F48AA6A</key>
 		<dict>
 			<key>from</key>
 			<string>15E0CC32-1309-4DED-9501-9D8DC46A29A9 - 15E0CC32-1309-4DED-9501-9D8DC46A29A9</string>
 			<key>to</key>
 			<string>17EA07FE-573C-4617-98D9-7D19A68FCB0D - 17EA07FE-573C-4617-98D9-7D19A68FCB0D</string>
+		</dict>
+		<key>94695000-8CD5-4370-A5E8-248C6F92D285</key>
+		<dict>
+			<key>from</key>
+			<string>17EA07FE-573C-4617-98D9-7D19A68FCB0D - 17EA07FE-573C-4617-98D9-7D19A68FCB0D</string>
+			<key>to</key>
+			<string>3A9DC48D-891C-46D0-A3AB-5781296E7F0E - 3A9DC48D-891C-46D0-A3AB-5781296E7F0E</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>
