@@ -7,6 +7,7 @@ import time
 import md5
 
 working_dir = os.path.dirname(sys.argv[0])
+update_only = len(sys.argv) > 1 and 'only' in str(sys.argv[1]).lower()
 
 class PatreonAPI(object):
     def __init__(self, access_token):
@@ -71,7 +72,7 @@ class MailChimpAPI(object):
         # TODO: we could http-GET update_result['response_body_url'], un-gzip & un-tar it, iterate over the responses, and retry any operation_id that had a non-200 status_code
         # ... or, we could just issue create requests for all the emails, and trust that the intersection of failures for the updates and failures for the creations is size 0
         creation_result = None
-        if update_result['errored_operations'] != 0:
+        if not update_only and update_result['errored_operations'] != 0:
             create_operations = [self.craft_single_email_creation(email, patronage_amount_and_full_name['amount_cents'],
                                                                   patronage_amount_and_full_name['full_name'])
                                  for email, patronage_amount_and_full_name in email_map.items()]
